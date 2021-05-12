@@ -1,5 +1,7 @@
 using DevIO.App.Data;
+using DevIO.Bussiness.Interfaces.Repository;
 using DevIO.Data.Context;
+using DevIO.Data.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -39,6 +41,11 @@ namespace DevIO.App
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddControllersWithViews();
+
+            services.AddScoped<DbContext>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ISupplierRepository, SupplierRepository>();
+            services.AddScoped<IAddressRepository, AddressRepository>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
