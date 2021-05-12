@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DevIO.Bussiness.Enumerators;
+using System.Collections.Generic;
 
 namespace DevIO.Bussiness.Models
 {
@@ -9,6 +10,6 @@ namespace DevIO.Bussiness.Models
         public SupplierType SupplierType { get; set; }
         public Address Address { get; set; }
         public bool Active { get; set; }
-        public IEnumerable<Products> Products { get; set; }
+        public IEnumerable<Product> Products { get; set; }
     }
 }

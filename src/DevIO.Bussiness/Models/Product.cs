@@ -2,7 +2,7 @@
 
 namespace DevIO.Bussiness.Models
 {
-    public class Products : Entity
+    public class Product : Entity
     {
         public Guid SupplierId { get; set; }
         public string Name { get; set; }

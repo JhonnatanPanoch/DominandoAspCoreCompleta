@@ -8,13 +8,14 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{128BD30A-1D33-4E02-9908-F8FD9F50C95A}"
 	ProjectSection(SolutionItems) = preProject
 		Solution Items\global.json = Solution Items\global.json
+		ReadMe.txt = ReadMe.txt
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIO.App", "src\DevIO.App\DevIO.App.csproj", "{53AB3E71-48A2-4D09-A579-8C475F7AC2C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevIO.App", "src\DevIO.App\DevIO.App.csproj", "{53AB3E71-48A2-4D09-A579-8C475F7AC2C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIO.Bussiness", "src\DevIO.Bussiness\DevIO.Bussiness.csproj", "{A5CC4534-F449-4351-94C7-37A5284F7FAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevIO.Bussiness", "src\DevIO.Bussiness\DevIO.Bussiness.csproj", "{A5CC4534-F449-4351-94C7-37A5284F7FAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevIO.Data", "src\DevIO.Data\DevIO.Data.csproj", "{78C551A3-BB55-4EFB-ACE7-20E7FFCF4775}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevIO.Data", "src\DevIO.Data\DevIO.Data.csproj", "{78C551A3-BB55-4EFB-ACE7-20E7FFCF4775}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

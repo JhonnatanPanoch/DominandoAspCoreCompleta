@@ -1,4 +1,4 @@
-﻿namespace DevIO.Bussiness.Models
+﻿namespace DevIO.Bussiness.Enumerators
 {
     public enum SupplierType
     {
