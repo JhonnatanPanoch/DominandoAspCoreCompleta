@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
@@ -11,6 +12,7 @@ namespace DevIO.App.ViewModels
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+        [DisplayName("Supplier")]
         public Guid SupplierId { get; set; }
         
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
@@ -38,5 +40,6 @@ namespace DevIO.App.ViewModels
         public bool Active { get; set; }
 
         public SupplierViewModel Supplier { get; set; }
+        public IEnumerable<SupplierViewModel> Suppliers { get; set; }
     }
 }
