@@ -12,7 +12,7 @@ namespace DevIO.App.ViewModels
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-        [DisplayName("Supplier")]
+        [DisplayName("Fornecedor")]
         public Guid SupplierId { get; set; }
         
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]
@@ -27,6 +27,7 @@ namespace DevIO.App.ViewModels
 
         public string Image { get; set; }
         
+        [DisplayName("Imagem do Produto")]
         public IFormFile ImageUpload { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório.")]

@@ -46,7 +46,7 @@ namespace DevIO.App.Controllers
         public async Task<IActionResult> Create()
         {
             ProductViewModel productViewModel = await PopulateSupplier(new ProductViewModel());
-            return View();
+            return View(productViewModel);
         }
 
         [HttpPost]
