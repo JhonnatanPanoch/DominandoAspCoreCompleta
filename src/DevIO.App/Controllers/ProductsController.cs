@@ -2,9 +2,11 @@
 using DevIO.App.ViewModels;
 using DevIO.Bussiness.Interfaces.Repository;
 using DevIO.Bussiness.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace DevIO.App.Controllers
@@ -54,6 +56,15 @@ namespace DevIO.App.Controllers
         public async Task<IActionResult> Create(ProductViewModel productViewModel)
         {
             productViewModel = await PopulateSupplier(productViewModel);
+
+            string prefix = Guid.NewGuid() + "_";
+            if (!await UploadFile(productViewModel.ImageUpload, prefix))
+            {
+                return View(productViewModel);
+            }
+
+            productViewModel.Image = prefix + productViewModel.ImageUpload.FileName;
+            productViewModel.CreateDate = DateTime.Now;
 
             if (!ModelState.IsValid)
                 return View(productViewModel);
@@ -123,6 +134,27 @@ namespace DevIO.App.Controllers
         {
             productViewModel.Suppliers = _mapper.Map<IEnumerable<SupplierViewModel>>(await _supplierRepository.List());
             return productViewModel;
+        }
+
+        private async Task<bool> UploadFile(IFormFile file, string prefix)
+        {
+            if (file.Length <= 0)
+                return false;
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imagens", prefix + file.FileName);
+
+            if (System.IO.File.Exists(path))
+            {
+                ModelState.AddModelError(string.Empty, "Imagem com o mesmo nome já cadastrada!");
+                return false;
+            }
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return true;
         }
     }
 }
