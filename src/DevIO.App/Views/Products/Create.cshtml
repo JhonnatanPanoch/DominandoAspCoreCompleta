@@ -30,13 +30,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="ImageUpload" class="control-label"></label>
-                
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="ImageUpload" asp-for="ImageUpload" />
                     <label data-browser="Procurar" style="width: 400px" class="custom-file-label" for="ImageUpload"></label>
                     <label style="display: none" id="img_nome"></label>
                 </div>
-
                 <span asp-validation-for="ImageUpload" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -44,7 +44,11 @@ namespace DevIO.Data.Repository
 
         public virtual async Task Update(TEntity model)
         {
-            _dbSet.Update(model);
+            // resolveu
+            var entry = _dbSet.First(e => e.Id == model.Id);
+            _db.Entry(entry).CurrentValues.SetValues(model);
+
+            //_dbSet.Update(model); problema
             await SaveChanges();
         }
 
