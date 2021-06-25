@@ -1,0 +1,73 @@
+﻿@model DevIO.App.ViewModels.SupplierViewModel
+
+<div>
+    <hr />
+    <h4>Endereço</h4>
+</div>
+
+@if (Model != null)
+{
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address.PublicPlace)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address.Number)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address.Complement)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address.Cep)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address.District)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Address.State)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Address.PublicPlace)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Address.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Address.Complement)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Address.Cep)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Address.District)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Address.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => modelItem.Address.State)
+                </td>
+
+                <td>
+                    <a class="btn btn-info" title="Editar">
+                        <span class="fa fa-pencil-alt"></span>
+                    </a>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+}
+
+

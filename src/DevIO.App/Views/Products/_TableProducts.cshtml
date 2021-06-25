@@ -1,23 +1,19 @@
-﻿@model IEnumerable<DevIO.App.ViewModels.SupplierViewModel>
-@using DevIO.App.Extensions
+﻿@model IEnumerable<DevIO.App.ViewModels.ProductViewModel>
 
-@{
-    ViewData["Title"] = "Lista de Fornecedores";
-}
-
-<h1>@ViewData["Title"]</h1>
-
-<p>
-    <a class="btn btn-info" asp-action="Create">Novo Fornecedor</a>
-</p>
 <table class="table table-hover">
     <thead class="thead-dark">
         <tr>
             <th>
+                <!-- Imagem-->
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Document)
+                @Html.DisplayNameFor(model => model.Supplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Active)
@@ -30,22 +26,29 @@
         {
             <tr>
                 <td>
+                    <img src="~/imagens/@item.Image" alt="@item.Image" style="width: 70px; height: 100px;" />
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @this.FormatDocument(item.SupplierType, item.Document);
+                    @Html.DisplayFor(modelItem => item.Supplier.Document)
+                </td>
+                <td>
+                    @item.Value.ToString("C")
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Active)
                 </td>
+
                 <td class="text-right">
-                    <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id">
+                    <a class="btn btn-info" asp-controller="Products" asp-action="Details" asp-route-id="@item.Id">
                         <span class="fa fa-search"></span>
                     </a>
-                    <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id">
+                    <a class="btn btn-warning" asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id">
                         <span class="fa fa-pencil-alt"></span>
                     </a>
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">
+                    <a class="btn btn-danger" asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id">
                         <span class="fa fa-trash-alt"></span>
                     </a>
                 </td>
