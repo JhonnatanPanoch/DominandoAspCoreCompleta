@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace DevIO.App.Controllers
 {
+    [Route("admin-fornecedores")]
     public class SuppliersController : BaseController
     {
         private readonly ISupplierRepository _supplierRepository;
@@ -25,11 +26,15 @@ namespace DevIO.App.Controllers
             _addressRepository = addressRepository;
         }
 
+        [Route("lista")]
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             return View(_mapper.Map<IEnumerable<SupplierViewModel>>(await _supplierRepository.List()));
         }
 
+        [Route("detalhes/{id:guid}")]
+        [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
             var supplierViewModel = await GetSupplierAddress(id);
@@ -39,11 +44,14 @@ namespace DevIO.App.Controllers
             return View(supplierViewModel);
         }
 
+        [Route("novo")]
+        [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
 
+        [Route("novo")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(SupplierViewModel supplierViewModel)
@@ -57,6 +65,8 @@ namespace DevIO.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("alterar/{id:guid}")]
+        [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
             var supplierViewModel = await GetSupplierProductsAdress(id);
@@ -66,6 +76,7 @@ namespace DevIO.App.Controllers
             return View(supplierViewModel);
         }
 
+        [Route("alterar/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, SupplierViewModel supplierViewModel)
@@ -83,6 +94,8 @@ namespace DevIO.App.Controllers
 
         }
 
+        [Route("apagar/{id:guid}")]
+        [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
             var supplierViewModel = await GetSupplierAddress(id);
@@ -92,6 +105,7 @@ namespace DevIO.App.Controllers
             return View(supplierViewModel);
         }
 
+        [Route("apagar/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -105,6 +119,7 @@ namespace DevIO.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("alterar-endereco/{id:guid}")]
         [HttpGet]
         public async Task<IActionResult> UpdateAddress(Guid id)
         {
@@ -115,6 +130,7 @@ namespace DevIO.App.Controllers
             return PartialView("_UpdateAddress", supplier);
         }
 
+        [Route("alterar-endereco/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAddress(SupplierViewModel supplierViewModel)
@@ -145,7 +161,6 @@ namespace DevIO.App.Controllers
 
             return PartialView("_DetailsAdress", supplier);
         }
-
 
         private async Task<SupplierViewModel> GetSupplierProductsAdress(Guid id)
         {

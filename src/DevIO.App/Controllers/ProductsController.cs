@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace DevIO.App.Controllers
 {
+    [Route("admin-produtos")]
     public class ProductsController : Controller
     {
         private readonly IProductRepository _productRepository;
@@ -27,6 +28,7 @@ namespace DevIO.App.Controllers
             _mapper = mapper;
         }
 
+        [Route("listar")]
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -34,6 +36,7 @@ namespace DevIO.App.Controllers
             return View(productsWithSuppliers);
         }
 
+        [Route("detalhes/{id:guid}")]
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
@@ -44,6 +47,7 @@ namespace DevIO.App.Controllers
             return View(productViewModel);
         }
 
+        [Route("novo")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -51,6 +55,7 @@ namespace DevIO.App.Controllers
             return View(productViewModel);
         }
 
+        [Route("novo")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductViewModel productViewModel)
@@ -74,6 +79,7 @@ namespace DevIO.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("alterar/{id:guid}")]
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -84,6 +90,7 @@ namespace DevIO.App.Controllers
             return View(productViewModel);
         }
 
+        [Route("alterar/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, ProductViewModel productViewModel)
@@ -119,6 +126,7 @@ namespace DevIO.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Route("apagar/{id:guid}")]
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -129,6 +137,7 @@ namespace DevIO.App.Controllers
             return View(productViewModel);
         }
 
+        [Route("apagar/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
