@@ -54,7 +54,7 @@
 </form>
 
 <h4>Endereços</h4>
-<div>
+<div id="AddressTarget">
     <partial name="_DetailsAdress" />
 </div>
 
@@ -65,6 +65,20 @@
     <partial name="../Products/_TableProducts" model="@Model.Products" />
 </div>
 
+<div id="myModal" class="modal fade in">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id="myModalContent"></div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            AjaxModal();
+        });
+    </script>
 }
