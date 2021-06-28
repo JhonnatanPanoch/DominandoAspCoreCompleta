@@ -36,11 +36,11 @@
 
             <h4>Endereço</h4>
             <hr />
-            <partial name="_Address"/>
+            <partial name="_Address" />
 
             <div class="form-group">
                 <input type="submit" value="Cadastrar" class="btn btn-primary" />
-                <a class="btn btn-info"  asp-action="Index">Voltar</a>
+                <a class="btn btn-info" asp-action="Index">Voltar</a>
             </div>
         </form>
     </div>
@@ -48,4 +48,8 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        bindCepForm();
+    </script>
 }
