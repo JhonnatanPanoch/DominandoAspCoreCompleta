@@ -1,12 +1,18 @@
 ﻿using DevIO.Bussiness.Enumerators;
+using DevIO.Bussiness.Interfaces.Repository;
 using FluentValidation;
+using System;
+using System.Linq;
 
 namespace DevIO.Bussiness.Models.Validations
 {
     public class SupplierValidation : AbstractValidator<Supplier>
     {
-        public SupplierValidation()
+        private readonly ISupplierRepository _supplierRepository;
+        public SupplierValidation(ISupplierRepository supplierRepository)
         {
+            _supplierRepository = supplierRepository;
+
             // Validação de nome
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
@@ -30,7 +36,14 @@ namespace DevIO.Bussiness.Models.Validations
                     .Equal(true).WithMessage("O documento fornecido é inválido.");
             });
 
+            RuleFor(x => IsDuplicated(x))
+                .NotEqual(true).WithMessage("Já existe um fornecedor com este documento informado.");
+        }
 
+        private bool IsDuplicated(Supplier supplier)
+        {
+            var isDuplicated = _supplierRepository.List(l => l.Document == supplier.Document && l.Id != supplier.Id).Result.ToList().Any();
+            return isDuplicated;
         }
 
         public class ValidationCpf

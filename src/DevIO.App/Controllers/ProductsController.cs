@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DevIO.App.ViewModels;
+using DevIO.Bussiness.Interfaces;
 using DevIO.Bussiness.Interfaces.Repository;
+using DevIO.Bussiness.Interfaces.Service;
 using DevIO.Bussiness.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,18 +14,22 @@ using System.Threading.Tasks;
 namespace DevIO.App.Controllers
 {
     [Route("admin-produtos")]
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         private readonly IProductRepository _productRepository;
         private readonly ISupplierRepository _supplierRepository;
+        private readonly IProductService _productService;
         private readonly IMapper _mapper;
 
         public ProductsController(
             IProductRepository productRepository,
             ISupplierRepository supplierRepository,
-            IMapper mapper)
+            IProductService productService,
+            IMapper mapper,
+            INotificator notificator) : base(notificator)
         {
             _productRepository = productRepository;
+            _productService = productService;
             _supplierRepository = supplierRepository;
             _mapper = mapper;
         }
@@ -74,7 +80,10 @@ namespace DevIO.App.Controllers
             if (!ModelState.IsValid)
                 return View(productViewModel);
 
-            await _productRepository.Insert(_mapper.Map<Product>(productViewModel));
+            await _productService.Insert(_mapper.Map<Product>(productViewModel));
+
+            if (!IsValid())
+                return View(productViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -121,7 +130,12 @@ namespace DevIO.App.Controllers
             dbProduct.Value = productViewModel.Value;
             dbProduct.Active = productViewModel.Active;
 
-            await _productRepository.Update(_mapper.Map<Product>(dbProduct));
+            await _productService.Update(_mapper.Map<Product>(dbProduct));
+
+            if (!IsValid())
+                return View(productViewModel);
+           
+            TempData["Sucesso"] = "Produto alterado com sucesso.";
 
             return RedirectToAction(nameof(Index));
         }
@@ -146,7 +160,12 @@ namespace DevIO.App.Controllers
             if (productViewModel == null)
                 return NotFound();
 
-            await _productRepository.Delete(id);
+            await _productService.Delete(id);
+
+            if (!IsValid())
+                return View(productViewModel);
+
+            TempData["Sucesso"] = "Produto excluído com sucesso.";
 
             return RedirectToAction(nameof(Index));
         }

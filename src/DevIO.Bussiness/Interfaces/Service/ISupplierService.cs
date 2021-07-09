@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace DevIO.Bussiness.Interfaces.Service
 {
-    public interface ISupplierService
+    public interface ISupplierService : IDisposable
     {
-        Task Create(Supplier supplier);
+        Task Insert(Supplier supplier);
         Task Update(Supplier supplier);
         Task Delete(Guid id);
         Task UpdateAddress(Address address);

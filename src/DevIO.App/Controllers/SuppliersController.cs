@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using DevIO.App.ViewModels;
+using DevIO.Bussiness.Interfaces;
 using DevIO.Bussiness.Interfaces.Repository;
+using DevIO.Bussiness.Interfaces.Service;
 using DevIO.Bussiness.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,17 +15,18 @@ namespace DevIO.App.Controllers
     public class SuppliersController : BaseController
     {
         private readonly ISupplierRepository _supplierRepository;
-        private readonly IAddressRepository _addressRepository;
+        private readonly ISupplierService _supplierService;
         private readonly IMapper _mapper;
 
         public SuppliersController(
             ISupplierRepository supplierRepository, 
+            ISupplierService supplierService,
             IMapper mapper,
-            IAddressRepository addressRepository)
+            INotificator notificator) : base(notificator)
         {
             _supplierRepository = supplierRepository;
             _mapper = mapper;
-            _addressRepository = addressRepository;
+            _supplierService = supplierService;
         }
 
         [Route("lista")]
@@ -60,7 +63,10 @@ namespace DevIO.App.Controllers
                 return View(supplierViewModel);
 
             Supplier supplier = _mapper.Map<Supplier>(supplierViewModel);
-            await _supplierRepository.Insert(supplier);
+            await _supplierService.Insert(supplier);
+
+            if (!IsValid())
+                return View(supplierViewModel);
 
             return RedirectToAction(nameof(Index));
         }
@@ -84,11 +90,20 @@ namespace DevIO.App.Controllers
             if (id != supplierViewModel.Id)
                 return NotFound();
 
+            var dbSupplier = await GetSupplierProductsAdress(id);
+            supplierViewModel.Products = dbSupplier.Products;
+            supplierViewModel.Address = dbSupplier.Address;
+
             if (!ModelState.IsValid)
                 return View(supplierViewModel);
 
             Supplier supplier = _mapper.Map<Supplier>(supplierViewModel);
-            await _supplierRepository.Update(supplier);
+            await _supplierService.Update(supplier);
+
+            if (!IsValid())
+                return View(supplierViewModel);
+
+            TempData["Sucesso"] = "Fornecedor alterado com sucesso.";
 
             return RedirectToAction(nameof(Index));
 
@@ -114,7 +129,12 @@ namespace DevIO.App.Controllers
             if (supplierViewModel == null)
                 return NotFound();
 
-            await _supplierRepository.Delete(id);
+            await _supplierService.Delete(id);
+
+            if (!IsValid())
+                return View(supplierViewModel);
+
+            TempData["Sucesso"] = "Fornecedor excluído com sucesso.";
 
             return RedirectToAction(nameof(Index));
         }
@@ -126,6 +146,7 @@ namespace DevIO.App.Controllers
             SupplierViewModel supplier = await GetSupplierAddress(id);
             if (supplier == null)
                 return NotFound();
+
 
             return PartialView("_UpdateAddress", supplier);
         }
@@ -142,9 +163,12 @@ namespace DevIO.App.Controllers
                 return PartialView("_UpdateAddress", supplierViewModel);
 
             Address model = _mapper.Map<Address>(supplierViewModel.Address);
-            await _addressRepository.Update(model);
+            await _supplierService.UpdateAddress(model);
 
             string url = Url.Action("GetAddress", "Suppliers", new { id = supplierViewModel.Address.SupplierId });
+           
+            TempData["Sucesso"] = "Endereço alterado com sucesso.";
+            ViewBag.Sucesso = "Endereço alterado com sucesso.";
 
             return Json(new { success = true, url });
         }

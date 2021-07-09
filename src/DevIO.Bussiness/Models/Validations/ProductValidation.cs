@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using DevIO.Bussiness.Interfaces.Repository;
+using FluentValidation;
 
 namespace DevIO.Bussiness.Models.Validations
 {

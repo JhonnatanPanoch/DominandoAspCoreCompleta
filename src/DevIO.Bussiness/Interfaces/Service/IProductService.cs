@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace DevIO.Bussiness.Interfaces.Service
 {
-    public interface IProductService
+    public interface IProductService : IDisposable
     {
-        Task Create(Product product);
+        Task Insert(Product product);
         Task Update(Product product);
         Task Delete(Guid id);
     }
