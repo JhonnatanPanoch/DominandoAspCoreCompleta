@@ -3,9 +3,10 @@ Instalação identity
 -Instalar Microsoft.EntityFrameworkCore.Design
 -Adicionar scaffolded item -> identity
 -Selecionar os layouts desejados (login e register)
+-Remover classe ihosting
 -Adcionar o Context e gerar
--Adicionar o contect na startup
--Adicionar o comando app.UseAuthentication() na startup
+-Adicionar o context na startup
+-Adicionar o comando app.UseAuthentication(), antes do UseAuthorization(), na startup
 
 Rodar comandos para gerar tabelas
 - add-migration Identity
