@@ -6,6 +6,7 @@ Instalação identity
 -Remover classe ihosting
 -Adcionar o Context e gerar
 -Adicionar o context na startup
+-Adicionar o .AddRoles<IdentityRole>() em services.AddDefaultIdentity
 -Adicionar o comando app.UseAuthentication(), antes do UseAuthorization(), na startup
 
 Rodar comandos para gerar tabelas

@@ -27,6 +27,7 @@ namespace AspNetCoreIdentity.Web
                 options.UseSqlServer(Configuration.GetConnectionString("AspNetCoreIdentityWebContextConnection")));
 
             services.AddDefaultIdentity<IdentityUser>()
+                .AddRoles<IdentityRole>()
                 .AddDefaultUI()
                 .AddEntityFrameworkStores<AspNetCoreIdentityWebContext>();
 
