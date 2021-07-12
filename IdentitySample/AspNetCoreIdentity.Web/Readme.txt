@@ -1,0 +1,7 @@
+-Instalar Microsoft.AspNetCore.Identity.UI
+-Instalar Microsoft.EntityFrameworkCore.Design
+-Adicionar scaffolded item -> identity
+-Selecionar os layouts desejados (login e register)
+-Adcionar o Context e gerar
+-Adicionar o contect na startup
+-Adicionar o comando app.UseAuthentication() na startup
