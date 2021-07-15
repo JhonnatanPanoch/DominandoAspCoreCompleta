@@ -1,4 +1,5 @@
-﻿using AspNetCoreIdentity.Web.Models;
+﻿using AspNetCoreIdentity.Web.Extensions;
+using AspNetCoreIdentity.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -44,6 +45,13 @@ namespace AspNetCoreIdentity.Web.Controllers
         {
             return View("Secret");
         }
+
+        [ClaimsAuthorize("Produtos", "Ler")]
+        public IActionResult ClaimsCustom()
+        {
+            return View("Secret");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
