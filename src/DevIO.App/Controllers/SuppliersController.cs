@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using DevIO.App.Extensions;
 using DevIO.App.ViewModels;
 using DevIO.Bussiness.Interfaces;
 using DevIO.Bussiness.Interfaces.Repository;
 using DevIO.Bussiness.Interfaces.Service;
 using DevIO.Bussiness.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace DevIO.App.Controllers
 {
+    [Authorize]
     [Route("admin-fornecedores")]
     public class SuppliersController : BaseController
     {
@@ -29,6 +32,7 @@ namespace DevIO.App.Controllers
             _supplierService = supplierService;
         }
 
+        [AllowAnonymous]
         [Route("lista")]
         [HttpGet]
         public async Task<IActionResult> Index()
@@ -36,6 +40,7 @@ namespace DevIO.App.Controllers
             return View(_mapper.Map<IEnumerable<SupplierViewModel>>(await _supplierRepository.List()));
         }
 
+        [AllowAnonymous]
         [Route("detalhes/{id:guid}")]
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
@@ -47,6 +52,7 @@ namespace DevIO.App.Controllers
             return View(supplierViewModel);
         }
 
+        [ClaimsAuthorize("Fornecedor", "Adicionar")]
         [Route("novo")]
         [HttpGet]
         public IActionResult Create()
@@ -54,6 +60,7 @@ namespace DevIO.App.Controllers
             return View();
         }
 
+        [ClaimsAuthorize("Fornecedor", "Adicionar")]
         [Route("novo")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -71,6 +78,7 @@ namespace DevIO.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Fornecedor", "Editar")]
         [Route("alterar/{id:guid}")]
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
@@ -82,6 +90,7 @@ namespace DevIO.App.Controllers
             return View(supplierViewModel);
         }
 
+        [ClaimsAuthorize("Fornecedor", "Editar")]
         [Route("alterar/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -109,6 +118,7 @@ namespace DevIO.App.Controllers
 
         }
 
+        [ClaimsAuthorize("Fornecedor", "Excluir")]
         [Route("apagar/{id:guid}")]
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
@@ -120,6 +130,7 @@ namespace DevIO.App.Controllers
             return View(supplierViewModel);
         }
 
+        [ClaimsAuthorize("Fornecedor", "Excluir")]
         [Route("apagar/{id:guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -139,6 +150,7 @@ namespace DevIO.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [ClaimsAuthorize("Fornecedor", "Editar")]
         [Route("alterar-endereco/{id:guid}")]
         [HttpGet]
         public async Task<IActionResult> UpdateAddress(Guid id)
@@ -151,6 +163,7 @@ namespace DevIO.App.Controllers
             return PartialView("_UpdateAddress", supplier);
         }
 
+        [ClaimsAuthorize("Fornecedor", "Editar")]
         [Route("alterar-endereco/{id:guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -173,6 +186,7 @@ namespace DevIO.App.Controllers
             return Json(new { success = true, url });
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAddress(Guid id)
         {

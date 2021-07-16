@@ -60,7 +60,7 @@
                 </td>
 
                 <td>
-                    <a asp-action="UpdateAddress" asp-route-id="@Model.Id" data-modal="" class="btn btn-info" title="Editar">
+                    <a suppress-by-action="Edit,GetAddress" asp-action="UpdateAddress" asp-route-id="@Model.Id" data-modal="" class="btn btn-info" title="Editar">
                         <span class="fa fa-pencil-alt"></span>
                     </a>
                 </td>
