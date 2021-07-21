@@ -62,7 +62,6 @@ namespace DevIO.App
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseGlobalizationConfig();
 
             app.UseEndpoints(endpoints =>
