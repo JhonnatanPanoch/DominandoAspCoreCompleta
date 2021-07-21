@@ -45,4 +45,9 @@ Publish
 
 
 
+------ Deploy SELF-HOSTING ------
+
+	- acessar a pasta em que o csproj está, via cmd
+	- rodar comando: dotnet run --project DevIO.App.csproj
+
 
