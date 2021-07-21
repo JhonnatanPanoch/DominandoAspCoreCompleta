@@ -1,0 +1,11 @@
+01 - SOLID - Artigo - Uncle Bob:
+	 http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod
+
+02 - SOLID - Tutorial em vídeo - Eduardo Pires:
+	https://www.eduardopires.net.br/2015/01/solid-teoria-e-pratica/
+
+03 - FluentValidation .NET - 04 - Documentação ASP.NET Core
+	https://fluentvalidation.net/
+
+04 - Documentação ASP.NET Core
+	https://docs.microsoft.com/pt-br/aspnet/core/?view=aspnetcore-2.2
