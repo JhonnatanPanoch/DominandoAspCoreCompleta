@@ -61,4 +61,8 @@ db: cursomvc-deviodbserver
 user: jpanoch ou jpanoch@cursomvc-deviodbserver
 pwd: aA@91943840
 
+para criar o banco na azure, rodar comandos: Update-database -Verbose -Context CustomDbContext
+
+para acessar o banco da azure, usar o sql server
+
 
