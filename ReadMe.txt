@@ -51,3 +51,14 @@ Publish
 	- rodar comando: dotnet run --project DevIO.App.csproj
 
 
+
+
+
+------ Deploy AZURE ------
+conn string: Data Source=tcp:cursomvc-deviodbserver.database.windows.net,1433;Initial Catalog=cursomvc_devio;User Id=jpanoch@cursomvc-deviodbserver;Password=aA@91943840
+
+db: cursomvc-deviodbserver
+user: jpanoch ou jpanoch@cursomvc-deviodbserver
+pwd: aA@91943840
+
+
