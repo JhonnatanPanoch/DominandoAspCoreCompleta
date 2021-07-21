@@ -48,7 +48,8 @@
                     <a class="btn btn-warning" asp-controller="Products" asp-action="Edit" asp-route-id="@item.Id">
                         <span class="fa fa-pencil-alt"></span>
                     </a>
-                    <a class="btn btn-danger" asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id">
+                    <a class="btn btn-danger" asp-controller="Products" asp-action="Delete" asp-route-id="@item.Id"
+                       suppress-by-claim-name="Produto" suppress-by-claim-value="Excluir">
                         <span class="fa fa-trash-alt"></span>
                     </a>
                 </td>
